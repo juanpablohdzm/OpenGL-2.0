@@ -67,8 +67,8 @@ int Window::Initialize()
 	// Get buffer size information
 	glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
 
-	//Setup viewport size
-	glViewport(0, 0, bufferWidth, bufferHeight);
+	SetupViewportSize();
+
 
 	//Setup what window will handle the callbacks
 	glfwSetWindowUserPointer(mainWindow, this);

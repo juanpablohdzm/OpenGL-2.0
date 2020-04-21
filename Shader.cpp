@@ -3,6 +3,8 @@
 #include "PointLight.h"
 #include "SpotLight.h"
 #include <iostream>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
 
 Shader::Shader() : shaderID(0), uniformModel_ID(0), uniformProjection_ID(0),pointLightCount(0),spotLightCount(0)
 {
@@ -145,6 +147,11 @@ void Shader::CompileShader(const char* vertexCode, const char* fragmentCode)
 	textureLocation = glGetUniformLocation(shaderID, "theTexture");
 	normalLocation = glGetUniformLocation(shaderID, "normalTexture");
 	useNormalLocation = glGetUniformLocation(shaderID, "useNormalTexture");
+	directionalShadowMapLocation = glGetUniformLocation(shaderID, "directionalShadowMap");
+
+	uniformDirectionalLightTransformLocation_ID = glGetUniformLocation(shaderID, "directionalLightTransform");
+
+
 
 
 }
@@ -222,6 +229,11 @@ void Shader::SetSpotLights(SpotLight* pLight, unsigned int lightCount)
 		pLight[i].UseLight(uniformSpotLight[i].uniformAmbientIntensity_ID, uniformSpotLight[i].uniformAmbientColour_ID, uniformSpotLight[i].uniformDiffuseIntensity_ID,
 			uniformSpotLight[i].uniformPosition_ID,uniformSpotLight[i].uniformDirection_ID, uniformSpotLight[i].uniformConstant_ID, uniformSpotLight[i].uniformLinear_ID, uniformSpotLight[i].uniformExponent_ID, uniformSpotLight[i].uniformEdge_ID);
 	}
+}
+
+void Shader::SetDirectionalLightTransform(glm::mat4* lTransform)
+{
+	glUniformMatrix4fv(uniformDirectionalLightTransformLocation_ID, 1, GL_FALSE, glm::value_ptr(*lTransform));
 }
 
 Shader::~Shader()

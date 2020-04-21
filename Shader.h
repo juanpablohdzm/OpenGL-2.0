@@ -6,7 +6,7 @@
 #include "CommonValues.h"
 
 #include <GL/glew.h>
-
+#include <glm/glm.hpp>
 
 
 class DirectionalLight;
@@ -28,6 +28,7 @@ public:
 	void SetDirectionalLight(DirectionalLight* dLight);
 	void SetPointLights(PointLight* pLight, unsigned int lightCount);
 	void SetSpotLights(SpotLight* pLight, unsigned int lightCount);
+	void SetDirectionalLightTransform(glm::mat4* lTransform);
 
 
 	inline GLuint GetProjectionLocation() const { return uniformProjection_ID; }
@@ -43,6 +44,8 @@ public:
 	inline GLuint GetTextureLocation() const { return textureLocation; }
 	inline GLuint GetNormalLocation() const { return normalLocation; }
 	inline GLuint GetUseNormalLocation() const { return useNormalLocation; }
+	inline GLuint GetDirectionalShadowMapLocation() const { return directionalShadowMapLocation; }
+	inline GLuint GetUniformDirectionalLightTransformLocation_ID() const { return uniformDirectionalLightTransformLocation_ID; }
 
 	~Shader();
 
@@ -88,8 +91,9 @@ private:
 	GLuint uniformPointLightCount_ID, uniformSpotLightCount_ID;
 	GLuint shaderID, uniformProjection_ID, uniformModel_ID, uniformView_ID;
 	GLuint uniformCameraPositionLocation_ID, uniformSpecularIntensity_ID, uniformRoughnessLocation_ID;
+	GLuint uniformDirectionalLightTransformLocation_ID;
 
-	GLuint textureLocation, normalLocation, useNormalLocation;
+	GLuint textureLocation, normalLocation, useNormalLocation, directionalShadowMapLocation;
 
 	void CompileShader(const char* vertexCode, const char* fragmentCode);
 	void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType);

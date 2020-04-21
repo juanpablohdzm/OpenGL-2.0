@@ -6,7 +6,7 @@ PointLight::PointLight() : Light(),constant(1.0f),linear(0.0f),exponent(0.0f),po
 }
 
 PointLight::PointLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat dIntensity,
-    glm::vec3 position, GLfloat cons, GLfloat lin, GLfloat exp): Light(red,green,blue,aIntensity,dIntensity), position(position),constant(cons),linear(lin), exponent(exp)
+    glm::vec3 position, GLfloat cons, GLfloat lin, GLfloat exp): Light(1024,1024,red,green,blue,aIntensity,dIntensity), position(position),constant(cons),linear(lin), exponent(exp)
 {
 
 }

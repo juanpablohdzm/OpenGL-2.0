@@ -9,6 +9,13 @@ public:
 	Window();
 
 	int Initialize();
+
+	void SetupViewportSize()
+	{
+		//Setup viewport size
+		glViewport(0, 0, bufferWidth, bufferHeight);
+	}
+
 	void ClearWindow();
 
 	void SwapBuffers() { glfwSwapBuffers(mainWindow); }

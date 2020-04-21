@@ -1,0 +1,26 @@
+﻿  Camera.cpp
+  Main.cpp
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.h(16,42): warning C4244: 'return': conversion from 'const GLint' to 'GLfloat', possible loss of data
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.h(17,43): warning C4244: 'return': conversion from 'const GLint' to 'GLfloat', possible loss of data
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Main.cpp(112,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  Mesh.cpp
+  Shader.cpp
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Shader.cpp(14,39): warning C4267: 'initializing': conversion from 'size_t' to 'GLint', possible loss of data
+  Source.cpp
+  Texture.cpp
+  Window.cpp
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.h(16,42): warning C4244: 'return': conversion from 'const GLint' to 'GLfloat', possible loss of data
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.h(17,43): warning C4244: 'return': conversion from 'const GLint' to 'GLfloat', possible loss of data
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.cpp(112,22): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.cpp(113,22): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.cpp(117,28): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.cpp(118,29): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.cpp(120,21): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.cpp(121,21): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Window.cpp(75): warning C4715: 'Window::Initialize': not all control paths return a value
+  All 355 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  OpenGLCourse.vcxproj -> C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\x64\Release\OpenGLCourse.exe

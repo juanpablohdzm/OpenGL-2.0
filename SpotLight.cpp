@@ -7,8 +7,8 @@ SpotLight::SpotLight() : PointLight(), direction(glm::vec3(0.0f,0.0f,0.0f)),edge
 
 
 
-SpotLight::SpotLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat dIntensity, glm::vec3 position,
-    glm::vec3 dir, GLfloat edge,  GLfloat cons, GLfloat lin, GLfloat exp) : PointLight(red,green,blue,aIntensity,dIntensity,position,cons,lin,exp),direction(dir), edge(edge)
+SpotLight::SpotLight(GLfloat shadowWidth, GLfloat shadowHeight, GLfloat near, GLfloat far, GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat dIntensity, glm::vec3 position,
+    glm::vec3 dir, GLfloat edge,  GLfloat cons, GLfloat lin, GLfloat exp) : PointLight(shadowWidth,shadowHeight,near,far,red,green,blue,aIntensity,dIntensity,position,cons,lin,exp),direction(dir), edge(edge)
 {
     procEdge = std::cosf(glm::radians(edge));
 }

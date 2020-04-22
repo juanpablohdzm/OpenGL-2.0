@@ -18,7 +18,7 @@ public:
 	GLuint GetShadowHeight() const { return shadowHeight; }
 
 
-	~ShadowMap();
+	virtual ~ShadowMap();
 
 protected:
 	GLuint FBO, shadowMap;

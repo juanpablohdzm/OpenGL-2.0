@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string.h>
 #include <fstream>
+#include <vector>
 #include "CommonValues.h"
 
 #include <GL/glew.h>
@@ -21,6 +22,7 @@ public:
 
 	void CreateShader(const char* vertexCode, const char* fragmentCode);
 	void CreateShaderFromFile(const char* vertexFileLocation, const char* fragmentFileLocation);
+	void CreateShaderFromFile(const char* vertexFileLocation,const char* geometryFileLocation, const char* fragmentFileLocation);
 
 	void UseShader();
 	void ClearShader();
@@ -29,6 +31,7 @@ public:
 	void SetPointLights(PointLight* pLight, unsigned int lightCount);
 	void SetSpotLights(SpotLight* pLight, unsigned int lightCount);
 	void SetDirectionalLightTransform(glm::mat4* lTransform);
+	void SetUniformlightMatrices(std::vector<glm::mat4> lightMatrices);
 
 
 	inline GLuint GetProjectionLocation() const { return uniformProjection_ID; }
@@ -46,6 +49,9 @@ public:
 	inline GLuint GetUseNormalLocation() const { return useNormalLocation; }
 	inline GLuint GetDirectionalShadowMapLocation() const { return directionalShadowMapLocation; }
 	inline GLuint GetUniformDirectionalLightTransformLocation_ID() const { return uniformDirectionalLightTransformLocation_ID; }
+	inline GLuint GetUniformOmniLightPosLocation_ID() const { return uniformOmniLightPosLocation_ID; }
+	inline GLuint GetUniformFarPlaneLocation_ID() const { return uniformFarPlaneLocation_ID; }
+	inline GLuint* GetUniformlightMatrices() { return uniformlightMatrices; }
 
 	~Shader();
 
@@ -92,11 +98,17 @@ private:
 	GLuint shaderID, uniformProjection_ID, uniformModel_ID, uniformView_ID;
 	GLuint uniformCameraPositionLocation_ID, uniformSpecularIntensity_ID, uniformRoughnessLocation_ID;
 	GLuint uniformDirectionalLightTransformLocation_ID;
+	GLuint uniformOmniLightPosLocation_ID, uniformFarPlaneLocation_ID;
+
+	GLuint uniformlightMatrices[6];
 
 	GLuint textureLocation, normalLocation, useNormalLocation, directionalShadowMapLocation;
 
 	void CompileShader(const char* vertexCode, const char* fragmentCode);
+	void CompileShader(const char* vertexCode,const char* geometryCode ,const char* fragmentCode);
 	void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType);
 	std::string ReadFile(const char* fileLoc);
+
+	void CompileProgram();
 };
 

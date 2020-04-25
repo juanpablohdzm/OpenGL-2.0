@@ -13,8 +13,11 @@ public:
 
 
 	void Read(GLuint textureLocation, TextureType textureUnit) override;
+	void Read(GLuint textureLocation, GLuint textureUnit) override;
 
 	~OmniShadowMap();
+
+
 private:
 
 };

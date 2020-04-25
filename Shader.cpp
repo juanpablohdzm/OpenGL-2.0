@@ -151,6 +151,16 @@ void Shader::CompileProgram()
 		snprintf(name, sizeof(name), "lightMatrices[%d]", i);
 		uniformlightMatrices[i] = glGetUniformLocation(shaderID, name);
 	}
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		char name[100] = { '\0' };
+		snprintf(name, sizeof(name), "omniShadowMaps[%d].shadowMap", i);
+		uniformOmniShadowMap[i].uniformShadowMap_ID = glGetUniformLocation(shaderID, name);
+
+		snprintf(name, sizeof(name), "omniShadowMaps[%d].farPlane", i);
+		uniformOmniShadowMap[i].uniformFarPlane_ID = glGetUniformLocation(shaderID, name);
+	}
 }
 
 
@@ -240,7 +250,7 @@ void Shader::SetDirectionalLight(DirectionalLight* dLight)
 		uniformDirectionalLight.uniformDiffuseIntensity_ID, uniformDirectionalLight.uniformDirection_ID);
 }
 
-void Shader::SetPointLights(PointLight* pLight, unsigned int lightCount)
+void Shader::SetPointLights(PointLight* pLight, unsigned int lightCount, unsigned int textureUnit, unsigned int offset)
 {
 	if (lightCount > MAX_POINT_LIGHTS) 
 		lightCount = MAX_POINT_LIGHTS;
@@ -251,10 +261,14 @@ void Shader::SetPointLights(PointLight* pLight, unsigned int lightCount)
 	{
 		pLight[i].UseLight(uniformPointLight[i].uniformAmbientIntensity_ID, uniformPointLight[i].uniformAmbientColour_ID, uniformPointLight[i].uniformDiffuseIntensity_ID,
 			uniformPointLight[i].uniformPosition_ID, uniformPointLight[i].uniformConstant_ID, uniformPointLight[i].uniformLinear_ID, uniformPointLight[i].uniformExponent_ID);
+
+		glUniform1i(uniformOmniShadowMap[i + offset].uniformShadowMap_ID, textureUnit + i);
+		glUniform1f(uniformOmniShadowMap[i + offset].uniformFarPlane_ID, pLight[i].GetFarPlane());
+		pLight[i].GetShadowMap()->Read(uniformOmniShadowMap[i + offset].uniformShadowMap_ID, textureUnit + i);
 	}
 }
 
-void Shader::SetSpotLights(SpotLight* pLight, unsigned int lightCount)
+void Shader::SetSpotLights(SpotLight* pLight, unsigned int lightCount,unsigned int textureUnit, unsigned int offset)
 {
 	if (lightCount > MAX_SPOT_LIGHTS)
 		lightCount = MAX_SPOT_LIGHTS;
@@ -265,6 +279,10 @@ void Shader::SetSpotLights(SpotLight* pLight, unsigned int lightCount)
 	{
 		pLight[i].UseLight(uniformSpotLight[i].uniformAmbientIntensity_ID, uniformSpotLight[i].uniformAmbientColour_ID, uniformSpotLight[i].uniformDiffuseIntensity_ID,
 			uniformSpotLight[i].uniformPosition_ID,uniformSpotLight[i].uniformDirection_ID, uniformSpotLight[i].uniformConstant_ID, uniformSpotLight[i].uniformLinear_ID, uniformSpotLight[i].uniformExponent_ID, uniformSpotLight[i].uniformEdge_ID);
+
+		glUniform1i(uniformOmniShadowMap[i + offset].uniformShadowMap_ID, textureUnit + i);
+		glUniform1f(uniformOmniShadowMap[i + offset].uniformFarPlane_ID, pLight[i].GetFarPlane());
+		pLight[i].GetShadowMap()->Read(uniformOmniShadowMap[i + offset].uniformShadowMap_ID, textureUnit + i);
 	}
 }
 

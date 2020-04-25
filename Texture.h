@@ -1,7 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 
-enum class TextureType {DIFFUSE,NORMAL,DIRECTIONAL_SHADOWMAP};
+enum class TextureType {DIFFUSE=0,NORMAL,DIRECTIONAL_SHADOWMAP};
 
 class Texture
 {

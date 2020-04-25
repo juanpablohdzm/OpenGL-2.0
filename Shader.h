@@ -28,8 +28,8 @@ public:
 	void ClearShader();
 
 	void SetDirectionalLight(DirectionalLight* dLight);
-	void SetPointLights(PointLight* pLight, unsigned int lightCount);
-	void SetSpotLights(SpotLight* pLight, unsigned int lightCount);
+	void SetPointLights(PointLight* pLight, unsigned int lightCount, unsigned int textureUnit,unsigned int offset);
+	void SetSpotLights(SpotLight* pLight, unsigned int lightCount,  unsigned int textureUnit, unsigned int offset);
 	void SetDirectionalLightTransform(glm::mat4* lTransform);
 	void SetUniformlightMatrices(std::vector<glm::mat4> lightMatrices);
 
@@ -92,6 +92,12 @@ private:
 		GLuint uniformDirection_ID;
 		GLuint uniformEdge_ID;
 	} uniformSpotLight[MAX_SPOT_LIGHTS];
+
+	struct 
+	{
+		GLuint uniformShadowMap_ID;
+		GLuint uniformFarPlane_ID;
+	}uniformOmniShadowMap[MAX_SPOT_LIGHTS+MAX_POINT_LIGHTS];
 
 
 	GLuint uniformPointLightCount_ID, uniformSpotLightCount_ID;

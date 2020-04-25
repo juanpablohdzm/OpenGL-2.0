@@ -13,6 +13,7 @@ public:
 	virtual void Write();
 
 	virtual void Read(GLuint textureLocation, TextureType textureUnit);
+	virtual void Read(GLuint textureLocation, GLuint textureUnit);
 
 	GLuint GetShadowWidth() const { return shadowWidth; }
 	GLuint GetShadowHeight() const { return shadowHeight; }

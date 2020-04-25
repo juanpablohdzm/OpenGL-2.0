@@ -55,6 +55,13 @@ void ShadowMap::Read(GLuint textureLocation,TextureType textureUnit)
 	glBindTexture(GL_TEXTURE_2D, shadowMap);
 }
 
+void ShadowMap::Read(GLuint textureLocation, GLuint textureUnit)
+{
+	glUniform1i(textureLocation, (int)textureUnit);
+	glActiveTexture(GL_TEXTURE0 + (int)textureUnit);
+	glBindTexture(GL_TEXTURE_2D, shadowMap);
+}
+
 ShadowMap::~ShadowMap()
 {
 	if (FBO)

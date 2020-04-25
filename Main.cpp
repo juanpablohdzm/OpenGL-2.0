@@ -128,10 +128,10 @@ void CreateObjects()
 	};
 
 	GLfloat floorVertices[] = {
-		-10.0f,0.0f,-10.0f, 0.0f,0.0f, 0.0f,1.0f,0.0f,
-		10.0f,0.0f,-10.0f, 10.0f,0.0f, 0.0f,1.0f,0.0f,
-		-10.0f,0.0f,10.0f, 0.0f,10.0f, 0.0f,1.0f,0.0f,
-		10.0f,0.0f,10.0f, 10.0f,10.0f, 0.0f,1.0f,0.0f
+		-10.0f,0.0f,-10.0f, 0.0f,0.0f, 0.0f,1.0f,0.0f,0.0f,1.0f,0.0f,
+		10.0f,0.0f,-10.0f, 10.0f,0.0f, 0.0f,1.0f,0.0f,0.0f,1.0f,0.0f,
+		-10.0f,0.0f,10.0f, 0.0f,10.0f, 0.0f,1.0f,0.0f, 0.0f,1.0f,0.0f,
+		10.0f,0.0f,10.0f, 10.0f,10.0f, 0.0f,1.0f,0.0f, 0.0f,1.0f,0.0f
 	};
 
 	CalculateAverageNormals(indices, 12, vertices, 32, 8, 5);
@@ -145,7 +145,7 @@ void CreateObjects()
 	meshList.push_back(obj);
 
 	obj = new Mesh();
-	obj->CreateMesh(floorVertices, floorIndices, 32, 6);
+	obj->CreateMesh(floorVertices, floorIndices, 44, 6);
 	meshList.push_back(obj);
 		
 }

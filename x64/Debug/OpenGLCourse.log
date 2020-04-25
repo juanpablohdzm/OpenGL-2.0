@@ -7,9 +7,5 @@ C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCour
 C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Main.cpp(358,19): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Main.cpp(366,19): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Main.cpp(374,19): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Main.cpp(396,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-  Skybox.cpp
-C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Skybox.cpp(33,114): warning C4267: 'argument': conversion from 'size_t' to 'GLenum', possible loss of data
-C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Skybox.cpp(25,22): warning C4101: 'bitDepth': unreferenced local variable
-  Generating Code...
+C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\OpenGLCourse\Main.cpp(394,23): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
   OpenGLCourse.vcxproj -> C:\Users\JuanPablo\Documents\Visual Studio 2019\Projects\OpenGLCourse\x64\Debug\OpenGLCourse.exe

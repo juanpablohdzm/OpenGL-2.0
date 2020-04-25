@@ -63,19 +63,19 @@ void Skybox::LoadFaces(std::vector<std::string>& faceLocations)
 
 	float skyboxVertices[] =
 	{
-		-1.0f,1.0f,-1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,
-		-1.0f,-1.0f,-1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,
-		1.0f,1.0f,-1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,
-		1.0f,-1.0f,-1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,
+		-1.0f,1.0f,-1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+		-1.0f,-1.0f,-1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+		1.0f,1.0f,-1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+		1.0f,-1.0f,-1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
 
-		-1.0f,1.0f,1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,
-		1.0f,1.0f,1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,
-		-1.0f,-1.0f,1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,
-		1.0f,-1.0f,1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f
+		-1.0f,1.0f,1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+		1.0f,1.0f,1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+		-1.0f,-1.0f,1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+		1.0f,-1.0f,1.0f, 0.0f,0.0f, 0.0f,0.0f,0.0f,0.0f,0.0f,0.0f
 	};
 
 	skyMesh = new Mesh();
-	skyMesh->CreateMesh(skyboxVertices, skyboxIndices, 64, 36);
+	skyMesh->CreateMesh(skyboxVertices, skyboxIndices, 88, 36);
 }
 
 Skybox::Skybox(std::vector<std::string>& faceLocations)

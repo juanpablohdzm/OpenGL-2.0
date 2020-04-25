@@ -6,6 +6,7 @@ in vec2 TexCoord;
 in vec3 Normal;
 in vec3 FragWorldPos;
 in vec4 DirectionalLightSpacePos;
+in mat3 TBN;
 
 const int MAX_POINT_LIGHTS = 3;
 const int MAX_SPOT_LIGHTS = 3;
@@ -205,7 +206,7 @@ void main()
 {	
 
 	vec4 normal = texture2D(normalTexture,TexCoord);
-	vec3 newNormal = useNormalTexture != 0 ? normalize(normal.xyz+Normal) : Normal;
+	vec3 newNormal = useNormalTexture != 0 ? normalize(TBN*vec3(normal)) : Normal;
 	vec4 finalColour = vec4(0.0f,0.0f,0.0f,0.0f);
 	finalColour += CalcDirectionalLight(newNormal);
 	finalColour += CalcPointLights(newNormal);

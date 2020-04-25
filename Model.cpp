@@ -9,7 +9,7 @@ Model::Model()
 void Model::LoadModel(const std::string& fileName)
 {
 	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices);
+	const aiScene* scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices | aiProcess_CalcTangentSpace);
 
 	if (!scene)
 	{
@@ -91,6 +91,7 @@ void Model::LoadMesh(aiMesh* mesh, const aiScene* scene)
 			vertices.insert(vertices.end(), { 0.0f,0.0f });
 		}
 		vertices.insert(vertices.end(), { mesh->mNormals[i].x,mesh->mNormals[i].y ,mesh->mNormals[i].z });
+		vertices.insert(vertices.end(), { mesh->mTangents[i].x,mesh->mTangents[i].y,mesh->mTangents[i].z });
 	}
 
 	for (size_t i = 0; i < mesh->mNumFaces; i++)

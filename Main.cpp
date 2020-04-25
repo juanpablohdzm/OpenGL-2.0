@@ -22,6 +22,7 @@
 #include "Model.h"
 #include "CommonValues.h"
 #include "Material.h"
+#include "Skybox.h"
 
 Window mainWindow;
 std::vector<Mesh*> meshList;
@@ -44,6 +45,8 @@ PointLight pointLights[MAX_POINT_LIGHTS];
 SpotLight spotLights[MAX_SPOT_LIGHTS];
 unsigned int spotLightCount = 3;
 unsigned int pointLightCount = 0;
+
+Skybox skybox;
 
 Material shinyMaterial;
 Material dullMaterial;
@@ -274,6 +277,11 @@ void OmniShadowMapPass(PointLight* light)
 
 void RenderPass(glm::mat4  projectionMatrix,glm::mat4 viewMatrix)
 {
+	mainWindow.SetupViewportSize();
+	mainWindow.ClearWindow();
+
+	skybox.DrawSkybox(viewMatrix, projectionMatrix);
+
 	shaderList[0]->UseShader();
 
 	uniformModel_ID = shaderList[0]->GetModelLocation();
@@ -283,9 +291,6 @@ void RenderPass(glm::mat4  projectionMatrix,glm::mat4 viewMatrix)
 	uniformRoughness_ID = shaderList[0]->GetUniformRoughnessLocation_ID();
 	uniformCameraLocation_ID = shaderList[0]->GetUniformCameraPositionLocation_ID();
 
-	mainWindow.SetupViewportSize();
-
-	mainWindow.ClearWindow();
 
 	glm::vec3 camLocation = camera.GetPosition();
 	glUniform3f(uniformCameraLocation_ID, camLocation.x, camLocation.y, camLocation.z);
@@ -368,9 +373,19 @@ int main()
 		glm::vec3(-0.5f, -1.0f, 0.0f), 30.0f,
 		0.3f, 0.2f, 0.1);
 
+
+	std::vector<std::string> skyboxFaces;
+	skyboxFaces.push_back("Textures/Skybox/posx.jpg");
+	skyboxFaces.push_back("Textures/Skybox/negx.jpg");
+	skyboxFaces.push_back("Textures/Skybox/posy.jpg");
+	skyboxFaces.push_back("Textures/Skybox/negy.jpg");
+	skyboxFaces.push_back("Textures/Skybox/posz.jpg");
+	skyboxFaces.push_back("Textures/Skybox/negz.jpg");
+
+
+	skybox.LoadFaces(skyboxFaces);
 	
 
-	
 	glm::mat4 proj = glm::perspective(glm::radians(60.0f), mainWindow.GetAspectRatio(), 0.1f, 100.0f);
 
 	//loop until window closed

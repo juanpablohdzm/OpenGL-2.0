@@ -161,6 +161,9 @@ void Shader::CompileProgram()
 		snprintf(name, sizeof(name), "omniShadowMaps[%d].farPlane", i);
 		uniformOmniShadowMap[i].uniformFarPlane_ID = glGetUniformLocation(shaderID, name);
 	}
+
+	timeLocation = glGetUniformLocation(shaderID, "_time");
+	bUseTimeLocation = glGetUniformLocation(shaderID, "bUseTime");
 }
 
 

@@ -54,6 +54,8 @@ Material dullMaterial;
 GLfloat deltaTime;
 GLfloat lastTime;
 
+GLfloat currentTime;
+
 GLuint uniformProjection_ID = 0, uniformModel_ID = 0, uniformView_ID = 0, uniformSpecularIntensity_ID = 0, uniformRoughness_ID = 0, uniformCameraLocation_ID = 0,
 uniformOmniLightPos_ID = 0, uniformFarPlane_ID = 0;
 
@@ -203,7 +205,9 @@ void RenderObjects()
 
 	glm::mat4 model2(1.0f);
 	model2 = glm::translate(model2, glm::vec3(0.0f, -1.0f, 0.0f));
+	model2 = glm::scale(model2, glm::vec3(0.3f, 0.3f, 0.3f));
 	glUniformMatrix4fv(uniformModel_ID, 1, GL_FALSE, glm::value_ptr(model2));
+	glUniform1i(shaderList[0]->GetUseTimeLocaiton(), 0);
 	whiteTexture.UseTexture(TextureType::DIFFUSE, false, shaderList[0]->GetTextureLocation(), shaderList[0]->GetUseNormalLocation());
 	shinyMaterial.UseMaterial(uniformSpecularIntensity_ID, uniformRoughness_ID);
 	meshList[2]->RenderMesh();
@@ -213,26 +217,27 @@ void RenderObjects()
 	model3 = glm::rotate(model3, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	model3 = glm::translate(model3, glm::vec3(0.0f, 0.0f, -20.5f));
 	glUniformMatrix4fv(uniformModel_ID, 1, GL_FALSE, glm::value_ptr(model3));
+	glUniform1i(shaderList[0]->GetUseTimeLocaiton(), 1);
 	shinyMaterial.UseMaterial(uniformSpecularIntensity_ID, uniformRoughness_ID);
 	cat.RenderModel(shaderList[0]->GetTextureLocation(), shaderList[0]->GetNormalLocation(), shaderList[0]->GetUseNormalLocation());
 
-	glm::mat4 model4(1.0f);
-	model4 = glm::scale(model4, glm::vec3(0.05f, 0.05f, 0.05f));
-	model4 = glm::rotate(model4, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	model4 = glm::translate(model4, glm::vec3(25.0f, 0.0f, -20.5f));
-	model4 = glm::rotate(model4, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-	glUniformMatrix4fv(uniformModel_ID, 1, GL_FALSE, glm::value_ptr(model4));
-	shinyMaterial.UseMaterial(uniformSpecularIntensity_ID, uniformRoughness_ID);
-	cat.RenderModel(shaderList[0]->GetTextureLocation(), shaderList[0]->GetNormalLocation(), shaderList[0]->GetUseNormalLocation());
+// 	glm::mat4 model4(1.0f);
+// 	model4 = glm::scale(model4, glm::vec3(0.05f, 0.05f, 0.05f));
+// 	model4 = glm::rotate(model4, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+// 	model4 = glm::translate(model4, glm::vec3(25.0f, 0.0f, -20.5f));
+// 	model4 = glm::rotate(model4, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+// 	glUniformMatrix4fv(uniformModel_ID, 1, GL_FALSE, glm::value_ptr(model4));
+// 	shinyMaterial.UseMaterial(uniformSpecularIntensity_ID, uniformRoughness_ID);
+// 	cat.RenderModel(shaderList[0]->GetTextureLocation(), shaderList[0]->GetNormalLocation(), shaderList[0]->GetUseNormalLocation());
 
-	glm::mat4 model5(1.0f);
-	model5 = glm::scale(model5, glm::vec3(0.05f, 0.05f, 0.05f));
-	model5 = glm::rotate(model5, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	model5 = glm::translate(model5, glm::vec3(-25.0f, 0.0f, -20.5f));
-	model5 = glm::rotate(model5, glm::radians(-45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-	glUniformMatrix4fv(uniformModel_ID, 1, GL_FALSE, glm::value_ptr(model5));
-	shinyMaterial.UseMaterial(uniformSpecularIntensity_ID, uniformRoughness_ID);
-	cat.RenderModel(shaderList[0]->GetTextureLocation(), shaderList[0]->GetNormalLocation(), shaderList[0]->GetUseNormalLocation());
+// 	glm::mat4 model5(1.0f);
+// 	model5 = glm::scale(model5, glm::vec3(0.05f, 0.05f, 0.05f));
+// 	model5 = glm::rotate(model5, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+// 	model5 = glm::translate(model5, glm::vec3(-25.0f, 0.0f, -20.5f));
+// 	model5 = glm::rotate(model5, glm::radians(-45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+// 	glUniformMatrix4fv(uniformModel_ID, 1, GL_FALSE, glm::value_ptr(model5));
+// 	shinyMaterial.UseMaterial(uniformSpecularIntensity_ID, uniformRoughness_ID);
+// 	cat.RenderModel(shaderList[0]->GetTextureLocation(), shaderList[0]->GetNormalLocation(), shaderList[0]->GetUseNormalLocation());
 
 }
 
@@ -305,8 +310,12 @@ void RenderPass(glm::mat4  projectionMatrix,glm::mat4 viewMatrix)
 
 	mainLight.GetShadowMap()->Read(shaderList[0]->GetDirectionalShadowMapLocation(), TextureType::DIRECTIONAL_SHADOWMAP);
 
+	glUniform1f(shaderList[0]->GetTimeLocation(), currentTime);
+
 	RenderObjects();
 }
+
+
 
 int main()
 {
@@ -391,10 +400,10 @@ int main()
 	//loop until window closed
 	while (!mainWindow.GetShouldClose())
 	{
-		GLfloat currentTime = glfwGetTime();
-		deltaTime = currentTime - lastTime;
-		lastTime = currentTime;
 
+		currentTime = glfwGetTime();
+		deltaTime = currentTime - lastTime;
+		lastTime = currentTime;		
 		//Get + Handle user input events
 		glfwPollEvents();
 

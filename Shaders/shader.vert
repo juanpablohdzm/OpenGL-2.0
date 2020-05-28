@@ -9,6 +9,8 @@ uniform mat4 model;
 uniform mat4 projection;
 uniform mat4 view;	
 uniform mat4 directionalLightTransform;
+uniform float _time;
+uniform int bUseTime;
 
 out mat3 TBN;																										
 out vec2 TexCoord;
@@ -20,7 +22,6 @@ out vec4 DirectionalLightSpacePos;
 											
 void main()									
 {																						
-    gl_Position = projection* view *model*vec4(pos.x, pos.y, pos.z,1.0);
     DirectionalLightSpacePos = directionalLightTransform * model *vec4(pos,1.0f);
 
 
@@ -32,4 +33,7 @@ void main()
     TexCoord = tex;
     Normal = mat3(transpose(inverse(model))) * norm;
     FragWorldPos = (model * vec4(pos,1.0f)).xyz; //model multiplication gives us the world position
+
+    vec3 finalPos = bUseTime > 0 ? pos + (2.0f*sin(_time*2.0f)+2.0f)*norm : pos;
+    gl_Position = projection* view *model*vec4(finalPos.x, finalPos.y, finalPos.z,1.0);
 };

@@ -52,6 +52,8 @@ public:
 	inline GLuint GetUniformOmniLightPosLocation_ID() const { return uniformOmniLightPosLocation_ID; }
 	inline GLuint GetUniformFarPlaneLocation_ID() const { return uniformFarPlaneLocation_ID; }
 	inline GLuint* GetUniformlightMatrices() { return uniformlightMatrices; }
+	inline GLuint GetTimeLocation() { return timeLocation; }
+	inline GLuint GetUseTimeLocaiton() { return bUseTimeLocation; }
 
 	~Shader();
 
@@ -109,6 +111,8 @@ private:
 	GLuint uniformlightMatrices[6];
 
 	GLuint textureLocation, normalLocation, useNormalLocation, directionalShadowMapLocation;
+
+	GLuint timeLocation, bUseTimeLocation;
 
 	void CompileShader(const char* vertexCode, const char* fragmentCode);
 	void CompileShader(const char* vertexCode,const char* geometryCode ,const char* fragmentCode);

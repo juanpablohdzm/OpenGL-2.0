@@ -34,6 +34,6 @@ void main()
     Normal = mat3(transpose(inverse(model))) * norm;
     FragWorldPos = (model * vec4(pos,1.0f)).xyz; //model multiplication gives us the world position
 
-    vec3 finalPos = bUseTime > 0 ? pos + (2.0f*sin(_time*2.0f)+2.0f)*norm : pos;
+    vec3 finalPos = bUseTime > 0 ? pos + (0.02f*sin(_time*2.0f)-0.02f)*norm : pos;
     gl_Position = projection* view *model*vec4(finalPos.x, finalPos.y, finalPos.z,1.0);
 };

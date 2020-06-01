@@ -33,6 +33,7 @@ Shader omniShadowShader;
 Camera camera;
 
 Model cat;
+Model heart;
 
 Texture brickTexture;
 Texture snowTexture;
@@ -213,13 +214,13 @@ void RenderObjects()
 	meshList[2]->RenderMesh();
 
 	glm::mat4 model3(1.0f);
-	model3 = glm::scale(model3, glm::vec3(0.05f, 0.05f, 0.05f));
-	model3 = glm::rotate(model3, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	model3 = glm::translate(model3, glm::vec3(0.0f, 0.0f, -20.5f));
+// 	model3 = glm::scale(model3, glm::vec3(0.05f, 0.05f, 0.05f));
+// 	model3 = glm::rotate(model3, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+// 	model3 = glm::translate(model3, glm::vec3(0.0f, 0.0f, -20.5f));
 	glUniformMatrix4fv(uniformModel_ID, 1, GL_FALSE, glm::value_ptr(model3));
 	glUniform1i(shaderList[0]->GetUseTimeLocaiton(), 1);
 	shinyMaterial.UseMaterial(uniformSpecularIntensity_ID, uniformRoughness_ID);
-	cat.RenderModel(shaderList[0]->GetTextureLocation(), shaderList[0]->GetNormalLocation(), shaderList[0]->GetUseNormalLocation());
+	heart.RenderModel(shaderList[0]->GetTextureLocation(), shaderList[0]->GetNormalLocation(), shaderList[0]->GetUseNormalLocation());
 
 // 	glm::mat4 model4(1.0f);
 // 	model4 = glm::scale(model4, glm::vec3(0.05f, 0.05f, 0.05f));
@@ -339,10 +340,12 @@ int main()
 	shinyMaterial = Material(1.0f, 32);
 	dullMaterial = Material(0.3f, 8);
 
-	cat = Model();
-	cat.LoadModel("Models/Cat.obj");
+// 	cat = Model();
+// 	cat.LoadModel("Models/Cat.obj");
+	heart = Model();
+	heart.LoadModel("Models/heart2.obj");
 
-	mainLight = DirectionalLight(1024,1024,1.0f,1.0f,1.0f,0.3f,0.2f, glm::vec3(0.0f, -1.0f, -1.0f));
+	mainLight = DirectionalLight(1024,1024,1.0f,1.0f,1.0f,0.2f,0.1f, glm::vec3(0.0f, -1.0f, -1.0f));
 	
 	pointLights[0] = PointLight(1024,1024,
 		0.01f,100.0f,
@@ -361,7 +364,7 @@ int main()
 	spotLights[0] = SpotLight(1024, 1024,
 		0.01f, 100.0f, 
 		1.0f, 0.0f, 0.0f,
-		0.6f, 1.0f,
+		0.8f, 0.7f,
 		glm::vec3(-2.0f, 4.0f, 0.0f),
 		glm::vec3(0.5f,-1.0f,0.0f), 30.0f,
 		0.3f, 0.2f, 0.1);
@@ -369,7 +372,7 @@ int main()
 	spotLights[1] = SpotLight(1024, 1024,
 		0.01f, 100.0f,
 		0.0f, 1.0f, 0.0f,
-		0.6f, 1.0f,
+		0.8f, 0.7f,
 		glm::vec3(0.0f, 4.0f, 0.0f),
 		glm::vec3(0.0f, -1.0f, 0.0f), 30.0f,
 		0.3f, 0.2f, 0.1);
@@ -377,7 +380,7 @@ int main()
 	spotLights[2] = SpotLight(1024, 1024,
 		0.01f, 100.0f,
 		0.0f, 0.0f, 1.0f,
-		0.6f, 1.0f,
+		0.8f, 0.7f,
 		glm::vec3(2.0f, 4.0f, 0.0f),
 		glm::vec3(-0.5f, -1.0f, 0.0f), 30.0f,
 		0.3f, 0.2f, 0.1);
